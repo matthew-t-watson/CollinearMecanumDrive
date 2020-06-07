@@ -1,6 +1,6 @@
 # The Collinear Mecanum Drive
 ## About
-This is a large portion of the code developed during my research into the Collinear Mecanum Drive (CMD), a novel omnidirectional  dynamically stable mobile robot locomotion technology. The codebase has been tested in Matlab R2019b. I am not actively supporting this codebase, but will be happy to assist with queries from other students/researchers. To see the CMD prototype developed during my PhD in action please visit https://www.youtube.com/watch?v=EG2pka4Bczg.
+This is a large portion of the code developed during my research into the Collinear Mecanum Drive (CMD), a novel omnidirectional  dynamically stable mobile robot locomotion technology. This code covers dynamics model derivation, various controller and planner derivations, and dynamics simulation and visualisation in Simulink. The codebase has been tested in Matlab R2019b. I am not actively supporting this codebase, but will be happy to assist with queries from other students/researchers. To see the CMD prototype developed during my PhD in action please visit https://www.youtube.com/watch?v=EG2pka4Bczg.
 
 ## Quick usage:
 - Set Matlab working directory to the top CMD directory, and add all subfolders to path.
