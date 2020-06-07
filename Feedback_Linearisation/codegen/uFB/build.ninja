@@ -6,7 +6,7 @@ ninja_required_version = 1.3
 root = .
 builddir = $root\build\win64
 matlabdir = C:\Program Files\MATLAB\R2019b
-startdir = C:\Users\Watson\Documents\GitHub\CMD
+startdir = C:\Users\Watson\Documents\GitHub\CollinearMecanumDrive
 
 # Toolchain information
 cc = lcc64

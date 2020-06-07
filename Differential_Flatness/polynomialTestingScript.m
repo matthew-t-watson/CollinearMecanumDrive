@@ -2,10 +2,6 @@
 close all;
 clearvars -except modelData trajectory
 
-
-%% Ensure we are in the correct path (modify for your CMD directory)
-% cd('C:\Users\Matt\Google Drive\Workspaces\Matlab\CMD');
-
 % Ensure these are installed and on the path
 addpath('../nestedSortStruct');
 addpath(genpath('../YALMIP-master/'));
