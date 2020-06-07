@@ -1,0 +1,49 @@
+# CompilerName=lcc64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = C:\Program Files\MATLAB\R2019b
+startdir = C:\Users\Watson\Documents\GitHub\CMD
+
+# Toolchain information
+cc = lcc64
+cxx = 
+linker = lcclnk64
+linkerxx = 
+
+cflags =  -nodeclspec -Zp8 -dll -c -I"$matlabdir\sys\lcc64\lcc64\include64" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I"$root" -I"$startdir" -I"$root\interface" -I"$matlabdir\extern\include" -I"$matlabdir\simulink\include" -I"$matlabdir\rtw\c\src" -I"$matlabdir\rtw\c\src\ext_mode\common" -I"$matlabdir\rtw\c\ert" -I"." -DMODEL=Pz_v_to_u_mex -DHAVESTDIO -DUSE_RTMODEL  
+
+cxxflags =  -I"$root" -I"$startdir" -I"$root\interface" -I"$matlabdir\extern\include" -I"$matlabdir\simulink\include" -I"$matlabdir\rtw\c\src" -I"$matlabdir\rtw\c\src\ext_mode\common" -I"$matlabdir\rtw\c\ert" -I"." -DMODEL=Pz_v_to_u_mex -DHAVESTDIO -DUSE_RTMODEL  
+
+ldflags =  -dll -L"$matlabdir\sys\lcc64\lcc64\lib64" -L"$matlabdir\extern\lib\win64\microsoft" -entry LibMain libmx.lib libmex.lib libmat.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib -o Pz_v_to_u_mex.mexw64 -s  Pz_v_to_u_mex.def
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in -Fo$out
+
+rule link
+    command = $linker $in $ldflags
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\Pz_v_to_u_data.obj : cc $root\Pz_v_to_u_data.c
+build $builddir\Pz_v_to_u_initialize.obj : cc $root\Pz_v_to_u_initialize.c
+build $builddir\Pz_v_to_u_terminate.obj : cc $root\Pz_v_to_u_terminate.c
+build $builddir\Pz_v_to_u.obj : cc $root\Pz_v_to_u.c
+build $builddir\_coder_Pz_v_to_u_api.obj : cc $root\interface\_coder_Pz_v_to_u_api.c
+build $builddir\_coder_Pz_v_to_u_mex.obj : cc $root\interface\_coder_Pz_v_to_u_mex.c
+build $builddir\_coder_Pz_v_to_u_info.obj : cc $root\interface\_coder_Pz_v_to_u_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+build $builddir\lccstub.obj : cc $matlabdir\sys\lcc64\lcc64\mex\lccstub.c
+
+# Link
+build $root\Pz_v_to_u_mex.mexw64 : link $builddir\rt_nonfinite.obj $builddir\Pz_v_to_u_data.obj $builddir\Pz_v_to_u_initialize.obj $builddir\Pz_v_to_u_terminate.obj $builddir\Pz_v_to_u.obj $builddir\_coder_Pz_v_to_u_api.obj $builddir\_coder_Pz_v_to_u_mex.obj $builddir\_coder_Pz_v_to_u_info.obj $builddir\c_mexapi_version.obj $builddir\lccstub.obj 

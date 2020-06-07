@@ -1,0 +1,9 @@
+LIBRARY dvy_tau_mex.mexw64
+EXPORTS
+mexFunction
+mexfilerequiredapiversion
+emlrtMexFcnProperties
+dvy_tau_initialize
+dvy_tau_terminate
+dvy_tau_atexit
+dvy_tau

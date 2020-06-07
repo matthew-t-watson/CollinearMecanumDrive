@@ -1,0 +1,49 @@
+# CompilerName=lcc64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = C:\Program Files\MATLAB\R2019b
+startdir = C:\Users\Watson\Documents\GitHub\CMD
+
+# Toolchain information
+cc = lcc64
+cxx = 
+linker = lcclnk64
+linkerxx = 
+
+cflags =  -nodeclspec -Zp8 -dll -c -I"$matlabdir\sys\lcc64\lcc64\include64" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I"$root" -I"$startdir" -I"$root\interface" -I"$matlabdir\extern\include" -I"$matlabdir\simulink\include" -I"$matlabdir\rtw\c\src" -I"$matlabdir\rtw\c\src\ext_mode\common" -I"$matlabdir\rtw\c\ert" -I"." -DMODEL=f_solve_fdvy_theta_p_x_mex -DHAVESTDIO -DUSE_RTMODEL  
+
+cxxflags =  -I"$root" -I"$startdir" -I"$root\interface" -I"$matlabdir\extern\include" -I"$matlabdir\simulink\include" -I"$matlabdir\rtw\c\src" -I"$matlabdir\rtw\c\src\ext_mode\common" -I"$matlabdir\rtw\c\ert" -I"." -DMODEL=f_solve_fdvy_theta_p_x_mex -DHAVESTDIO -DUSE_RTMODEL  
+
+ldflags =  -dll -L"$matlabdir\sys\lcc64\lcc64\lib64" -L"$matlabdir\extern\lib\win64\microsoft" -entry LibMain libmx.lib libmex.lib libmat.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib -o f_solve_fdvy_theta_p_x_mex.mexw64 -s  f_solve_fdvy_theta_p_x_mex.def
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in -Fo$out
+
+rule link
+    command = $linker $in $ldflags
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\f_solve_fdvy_theta_p_x_data.obj : cc $root\f_solve_fdvy_theta_p_x_data.c
+build $builddir\f_solve_fdvy_theta_p_x_initialize.obj : cc $root\f_solve_fdvy_theta_p_x_initialize.c
+build $builddir\f_solve_fdvy_theta_p_x_terminate.obj : cc $root\f_solve_fdvy_theta_p_x_terminate.c
+build $builddir\f_solve_fdvy_theta_p_x.obj : cc $root\f_solve_fdvy_theta_p_x.c
+build $builddir\_coder_f_solve_fdvy_theta_p_x_api.obj : cc $root\interface\_coder_f_solve_fdvy_theta_p_x_api.c
+build $builddir\_coder_f_solve_fdvy_theta_p_x_mex.obj : cc $root\interface\_coder_f_solve_fdvy_theta_p_x_mex.c
+build $builddir\_coder_f_solve_fdvy_theta_p_x_info.obj : cc $root\interface\_coder_f_solve_fdvy_theta_p_x_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+build $builddir\lccstub.obj : cc $matlabdir\sys\lcc64\lcc64\mex\lccstub.c
+
+# Link
+build $root\f_solve_fdvy_theta_p_x_mex.mexw64 : link $builddir\rt_nonfinite.obj $builddir\f_solve_fdvy_theta_p_x_data.obj $builddir\f_solve_fdvy_theta_p_x_initialize.obj $builddir\f_solve_fdvy_theta_p_x_terminate.obj $builddir\f_solve_fdvy_theta_p_x.obj $builddir\_coder_f_solve_fdvy_theta_p_x_api.obj $builddir\_coder_f_solve_fdvy_theta_p_x_mex.obj $builddir\_coder_f_solve_fdvy_theta_p_x_info.obj $builddir\c_mexapi_version.obj $builddir\lccstub.obj 

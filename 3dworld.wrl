@@ -1,0 +1,217 @@
+#VRML V2.0 utf8
+
+#Created with V-Realm Builder v2.0
+#Integrated Data Systems Inc.
+#www.ids-net.com
+
+
+DEF VRML_to_user Transform {
+	translation	0 0 0
+	rotation	1 0 0  1.5708
+	children [ 
+	    DirectionalLight {
+		    direction	-0.428564 -0.476182 -0.767844
+	    }
+
+	    Viewpoint {
+		    orientation	0.234604 0.529323 0.815339  2.33891
+		    position	1.7539 1.4537 0.9441
+	    }
+
+	    DEF Ground Transform {
+		    translation	0 0 -0.03
+		    children Shape {
+			    appearance	Appearance {
+				    textureTransform	TextureTransform {
+					    scale	200 200
+				    }
+
+				    texture	DEF Stucco_Tan ImageTexture {
+					    url	"texture/Stucko_2.jpg"
+				    }
+
+			    }
+
+			    geometry	Box {
+				    size	20 20 1e-005
+			    }
+
+		    }
+	    }
+
+	    DEF Body_Position Transform {
+		    translation	0 0 0
+		    children [ 
+			DEF Body_Orientation Transform {
+				translation	0 0 0
+				children [ 
+				    DEF Platform Transform {
+					    translation	0 0 0.04
+					    children Shape {
+						    appearance	Appearance {
+							    material	Material {
+							    }
+
+							    texture	DEF Metal ImageTexture {
+								    url	"texture/Metal.jpg"
+							    }
+
+						    }
+
+						    geometry	Box {
+							    size	0.3 0.08 0.02
+						    }
+
+					    }
+				    }
+
+				    DEF Wheel4 Transform {
+					    translation	-0.105 0 0
+					    rotation	0 0 1  1.5708
+					    children Shape {
+						    appearance	Appearance {
+							    material	Material {
+								    diffuseColor	0.0223017 0.8 0.139417
+								    specularColor	1 1 1
+							    }
+
+							    texture	DEF Granite ImageTexture {
+								    url	"texture/Granit_1.jpg"
+							    }
+
+						    }
+
+						    geometry	Cylinder {
+							    height	0.025
+							    radius	0.03
+						    }
+
+					    }
+				    }
+
+				    DEF Wheel3 Transform {
+					    translation	-0.063 0 0
+					    rotation	0 0 1  1.5708
+					    children Shape {
+						    appearance	Appearance {
+							    material	Material {
+							    }
+
+							    texture	ImageTexture {
+								    url	"texture/Granit_1.jpg"
+							    }
+
+						    }
+
+						    geometry	Cylinder {
+							    height	0.025
+							    radius	0.03
+						    }
+
+					    }
+				    }
+
+				    DEF Wheel2 Transform {
+					    translation	0.063 0 0
+					    rotation	0 0 1  1.5708
+					    children Shape {
+						    appearance	Appearance {
+							    material	Material {
+							    }
+
+							    texture	ImageTexture {
+								    url	"texture/Granit_1.jpg"
+							    }
+
+						    }
+
+						    geometry	Cylinder {
+							    height	0.025
+							    radius	0.03
+						    }
+
+					    }
+				    }
+
+				    DEF Wheel1 Transform {
+					    translation	0.105 0 0
+					    rotation	0 0 1  1.5708
+					    children Shape {
+						    appearance	Appearance {
+							    material	Material {
+							    }
+
+							    texture	ImageTexture {
+								    url	"texture/Granit_1.jpg"
+							    }
+
+						    }
+
+						    geometry	Cylinder {
+							    height	0.025
+							    radius	0.03
+						    }
+
+					    }
+				    }
+
+				    DEF Reaction_Wheel Transform {
+					    translation	0 0 0.2
+					    rotation	0 0 1  1.5708
+					    children Shape {
+						    appearance	Appearance {
+							    material	Material {
+							    }
+
+							    texture	DEF Brick_Grey ImageTexture {
+								    url	"texture/Brick_4.gif"
+							    }
+
+						    }
+
+						    geometry	Cylinder {
+							    height	0.05
+							    radius	0.022
+							    bottom	TRUE
+						    }
+
+					    }
+				    }
+				]
+			}
+
+			DEF Body_view Viewpoint {
+				orientation	0.234604 0.529323 0.815339  2.33891
+				position	0.5 0.5 0.3
+			}
+
+			Transform {
+				translation	-0.728 0 0.048
+				rotation	-0.0990148 0.0990148 -0.990148  1.5708
+				children DEF Side_View Viewpoint {
+					orientation	1 0 0  1.5708
+					position	0 0 0.2
+				}
+			}
+
+			DEF Birds_eye_view Viewpoint {
+				fieldOfView	0.785398
+				position	0 0 2
+				description	""
+			}
+		    ]
+	    }
+
+	    Transform {
+		    children Shape {
+			    appearance	Appearance {
+				    material	Material {
+				    }
+
+			    }
+
+			    geometry	NULL
+		    }
+	    }
+	]
+}

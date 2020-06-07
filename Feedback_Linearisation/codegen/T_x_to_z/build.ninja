@@ -1,0 +1,49 @@
+# CompilerName=lcc64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = C:\Program Files\MATLAB\R2019b
+startdir = C:\Users\Watson\Documents\GitHub\CMD
+
+# Toolchain information
+cc = lcc64
+cxx = 
+linker = lcclnk64
+linkerxx = 
+
+cflags =  -nodeclspec -Zp8 -dll -c -I"$matlabdir\sys\lcc64\lcc64\include64" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I"$root" -I"$startdir" -I"$root\interface" -I"$matlabdir\extern\include" -I"$matlabdir\simulink\include" -I"$matlabdir\rtw\c\src" -I"$matlabdir\rtw\c\src\ext_mode\common" -I"$matlabdir\rtw\c\ert" -I"." -DMODEL=T_x_to_z_mex -DHAVESTDIO -DUSE_RTMODEL  
+
+cxxflags =  -I"$root" -I"$startdir" -I"$root\interface" -I"$matlabdir\extern\include" -I"$matlabdir\simulink\include" -I"$matlabdir\rtw\c\src" -I"$matlabdir\rtw\c\src\ext_mode\common" -I"$matlabdir\rtw\c\ert" -I"." -DMODEL=T_x_to_z_mex -DHAVESTDIO -DUSE_RTMODEL  
+
+ldflags =  -dll -L"$matlabdir\sys\lcc64\lcc64\lib64" -L"$matlabdir\extern\lib\win64\microsoft" -entry LibMain libmx.lib libmex.lib libmat.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib -o T_x_to_z_mex.mexw64 -s  T_x_to_z_mex.def
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in -Fo$out
+
+rule link
+    command = $linker $in $ldflags
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\T_x_to_z_data.obj : cc $root\T_x_to_z_data.c
+build $builddir\T_x_to_z_initialize.obj : cc $root\T_x_to_z_initialize.c
+build $builddir\T_x_to_z_terminate.obj : cc $root\T_x_to_z_terminate.c
+build $builddir\T_x_to_z.obj : cc $root\T_x_to_z.c
+build $builddir\_coder_T_x_to_z_api.obj : cc $root\interface\_coder_T_x_to_z_api.c
+build $builddir\_coder_T_x_to_z_mex.obj : cc $root\interface\_coder_T_x_to_z_mex.c
+build $builddir\_coder_T_x_to_z_info.obj : cc $root\interface\_coder_T_x_to_z_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+build $builddir\lccstub.obj : cc $matlabdir\sys\lcc64\lcc64\mex\lccstub.c
+
+# Link
+build $root\T_x_to_z_mex.mexw64 : link $builddir\rt_nonfinite.obj $builddir\T_x_to_z_data.obj $builddir\T_x_to_z_initialize.obj $builddir\T_x_to_z_terminate.obj $builddir\T_x_to_z.obj $builddir\_coder_T_x_to_z_api.obj $builddir\_coder_T_x_to_z_mex.obj $builddir\_coder_T_x_to_z_info.obj $builddir\c_mexapi_version.obj $builddir\lccstub.obj 

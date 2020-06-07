@@ -1,0 +1,9 @@
+LIBRARY uFB_mex.mexw64
+EXPORTS
+mexFunction
+mexfilerequiredapiversion
+emlrtMexFcnProperties
+uFB_initialize
+uFB_terminate
+uFB_atexit
+uFB

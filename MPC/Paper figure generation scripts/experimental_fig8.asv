@@ -1,0 +1,24 @@
+
+% close all;
+
+% data = import_data('D:\Google_Drive\Labview\Robot 3\Robot test data\data_070219_1322_figure_8_aggressive_control_10s.csv');
+data = import_data('D:\Google_Drive\Labview\Robot 3\Robot test data\data_170719_1508.csv'); % 
+data = import_data('D:\Google_Drive\Labview\Robot 3\Robot test data\data_170719_1548.csv');
+% data = import_data('D:\Google_Drive\Labview\Robot 3\Robot test data\data_170719_1556.csv');
+
+
+
+
+
+data.MPC.ref = data.ref;
+data.MPC.u = struct2array(data.tau)';
+data.state.t = data.t;
+data.MPC.t = data.t;
+% data = trim_data(data, 51.98, 51.98+12);
+
+% plot_xy_readout(data, constraints, true, 'D:\Google_Drive\Matlab\Matt_MPC\Figures\experimental_figure_8.tex');
+plot_xy_readout_unconstrained_case(data, constraints, false, 'D:\Google_Drive\Matlab\Matt_MPC\Figures\experimental_figure_8_unconstrained.tex');
+plot_xy(data, constraints, false, 'D:\Google_Drive\Matlab\Matt_MPC\Figures\experimental_figure_8_2d.tex');
+
+% error = sqrt((data.MPC.ref.x - data.state.x(1:5:end)).^2 + (data.MPC.ref.y - data.state.y(1:5:end)).^2);
+% figure, plot(error);

@@ -1,0 +1,9 @@
+LIBRARY f_solve_fdvy_theta_p_x_mex.mexw64
+EXPORTS
+mexFunction
+mexfilerequiredapiversion
+emlrtMexFcnProperties
+f_solve_fdvy_theta_p_x_initialize
+f_solve_fdvy_theta_p_x_terminate
+f_solve_fdvy_theta_p_x_atexit
+f_solve_fdvy_theta_p_x

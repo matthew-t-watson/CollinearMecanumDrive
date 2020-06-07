@@ -1,0 +1,10 @@
+
+open matt:58245824@10.0.0.2:22 -hostkey="ssh-ed25519 256 G/H2apcFbP+MQVbhL+R53wrSVtLmZjOnkBrv8AsbATc=" -rawsettings Tunnel=1 TunnelHostName=myRIO-robot TunnelPortNumber=22 TunnelUserName=admin TunnelPasswordPlain=58245824 TunnelHostKey="ssh-ed25519 256 iq66/fvhPyzK/WgQgBBSApmntf41V4lXWk5YbhFDCH8="
+rmdir /home/matt/MPC/MPC_qpOASES
+mkdir /home/matt/MPC/MPC_qpOASES
+put D:\Google_Drive\GitHub\MPC_qpOASES\src /home/matt/MPC/MPC_qpOASES/src
+put D:\Google_Drive\GitHub\MPC_qpOASES\include /home/matt/MPC/MPC_qpOASES/include
+put D:\Google_Drive\GitHub\MPC_qpOASES\Makefile /home/matt/MPC/MPC_qpOASES/Makefile
+call /home/matt/MPC/build_MPC_qpOASES
+close
+exit

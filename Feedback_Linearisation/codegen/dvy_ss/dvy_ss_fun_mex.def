@@ -1,0 +1,9 @@
+LIBRARY dvy_ss_fun_mex.mexw64
+EXPORTS
+mexFunction
+mexfilerequiredapiversion
+emlrtMexFcnProperties
+dvy_ss_fun_initialize
+dvy_ss_fun_terminate
+dvy_ss_fun_atexit
+dvy_ss_fun
